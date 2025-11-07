@@ -14,12 +14,16 @@ namespace CoreLayer.WebDriver
     {
         public IWebDriver CreateChrome()
         {
-            return new ChromeDriver();
+            var options = new ChromeOptions();
+            options.AddArguments("--headless","--start-maximized");
+            return new ChromeDriver(options);
         }
 
         public IWebDriver CreateFirefox()
         {
-            return new FirefoxDriver();
+            var options = new FirefoxOptions();
+            options.AddArguments("--headless", "--start-maximized");
+            return new FirefoxDriver(options);
         }
     }
 }

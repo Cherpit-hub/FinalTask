@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using Serilog;
 
 namespace CoreLayer
 {
@@ -41,6 +42,7 @@ namespace CoreLayer
             }
             catch(NoSuchElementException) 
             {
+                Log.Error("Element not found in ClickHandler");
                 return base.Handle(driver, locator);
             }
         }
@@ -60,7 +62,7 @@ namespace CoreLayer
             {
                 if(_count > 0)
                 {
-                    throw new NoSuchElementException();
+                    return base.Handle(driver, locator);
                 }
                 _count = 1;
                 driver.FindElement(locator).SendKeys(_textToSend);
@@ -68,6 +70,7 @@ namespace CoreLayer
             }
             catch (NoSuchElementException) 
             {
+                Log.Error("Element not found in SendKeysHandler");
                 return base.Handle(driver, locator);
             }
 
@@ -92,6 +95,7 @@ namespace CoreLayer
             }
             catch (NoSuchElementException)
             {
+                Log.Error("Element not found in ClearInputHandler");
                 return base.Handle(driver, locator);
             }
         }
