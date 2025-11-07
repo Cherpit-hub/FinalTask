@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36518.9
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLayer", "FinalTask\TestLayer.csproj", "{C5DFB706-6865-48AD-AAB3-9A8C68B4AF0D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLayer", "TestLayer\TestLayer.csproj", "{C5DFB706-6865-48AD-AAB3-9A8C68B4AF0D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{54C6090A-485D-412E-B996-B59F841BC675} = {54C6090A-485D-412E-B996-B59F841BC675}
 		{56E407A8-1F6F-48E3-887A-B9A2FBCED3D8} = {56E407A8-1F6F-48E3-887A-B9A2FBCED3D8}
