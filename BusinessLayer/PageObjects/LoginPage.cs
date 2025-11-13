@@ -8,10 +8,10 @@ namespace BusinessLayer.PageObjects
     {
         private readonly IWebDriver _driver;
         private static string Url { get; } = "https://www.saucedemo.com/";
-        private readonly By _usernameLocator = By.CssSelector("#user-name");
-        private readonly By _passwordLocator = By.CssSelector("#password");
-        private readonly By _loginButtonLocator = By.CssSelector("#login-button");
-        private readonly By _errorLocator = By.CssSelector(".error-message-container h3");
+        private readonly By _usernameLocator = By.CssSelector("input[name *= 'user-name']");
+        private readonly By _passwordLocator = By.CssSelector("input[name *= 'password']");
+        private readonly By _loginButtonLocator = By.CssSelector("input[name *= 'login'][type = 'submit']");
+        private readonly By _errorLocator = By.CssSelector("div[class*='error'][class*='container'] h3");
 
         public LoginPage(IWebDriver driver)
         {
@@ -25,22 +25,18 @@ namespace BusinessLayer.PageObjects
             handlerChain.SetNext(new SendKeysHandler(password));
             handlerChain.Handle(_driver, _usernameLocator);
             handlerChain.Handle(_driver, _passwordLocator);
-            Log.Information("Username after input is {Username}", _driver.FindElement(_usernameLocator).GetAttribute("value"));
-            Log.Information("Password after input is {Psername}", _driver.FindElement(_passwordLocator).GetAttribute("value"));
             return this;
         }
         public LoginPage ClearUsername()
         {
             var clear = new ClearInputHandler();
             clear.Handle(_driver,_usernameLocator);
-            Log.Information("Username after clearing is {Username}", _driver.FindElement(_usernameLocator).GetAttribute("value"));
             return this;
         }
         public LoginPage ClearPassword()
         {
             var clear = new ClearInputHandler();
             clear.Handle(_driver, _passwordLocator);
-            Log.Information("Password after clearing is {Password}", _driver.FindElement(_passwordLocator).GetAttribute("value"));
             return this;
         }
         public LoginPage ClickLoginInvalid()
@@ -57,7 +53,6 @@ namespace BusinessLayer.PageObjects
         }
         public string GetErrorMessage()
         {
-            Log.Information("Error message: {ErrorMessage}", _driver.FindElement(_errorLocator).Text);
             return _driver.FindElement(_errorLocator).Text;
         }
     }
