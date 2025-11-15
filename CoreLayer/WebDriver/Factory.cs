@@ -3,7 +3,6 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
-using WebDriverManager.Helpers;
 
 namespace CoreLayer.WebDriver
 {
@@ -15,10 +14,12 @@ namespace CoreLayer.WebDriver
     }
     public class WebDriverFactory : IAbstractFactory
     {
+        private readonly TestConfig _testConfig = new TestConfig();
         public IWebDriver CreateChrome()
         {
+            var browserInfo = _testConfig.GetBrowserInfo("Chrome");
             var options = new ChromeOptions();
-            options.AddArgument("--headless");
+            options.AddArguments($"{browserInfo.Options}");
             options.AddArgument("--start-maximized");
             new DriverManager().SetUpDriver(new ChromeConfig());
             return new ChromeDriver(options);
@@ -26,8 +27,9 @@ namespace CoreLayer.WebDriver
 
         public IWebDriver CreateFirefox()
         {
+            var browserInfo = _testConfig.GetBrowserInfo("Firefox");
             var options = new FirefoxOptions();
-            options.AddArgument("--headless");
+            options.AddArgument($"{browserInfo.Options}");
             new DriverManager().SetUpDriver(new FirefoxConfig());
             return new FirefoxDriver(options);
         }

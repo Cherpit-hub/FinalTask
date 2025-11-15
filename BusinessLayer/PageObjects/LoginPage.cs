@@ -7,7 +7,7 @@ namespace BusinessLayer.PageObjects
     public class LoginPage
     {
         private readonly IWebDriver _driver;
-        private static string Url { get; } = "https://www.saucedemo.com/";
+        private readonly TestConfig _testConfig = new();
         private readonly By _usernameLocator = By.CssSelector("input[name *= 'user-name']");
         private readonly By _passwordLocator = By.CssSelector("input[name *= 'password']");
         private readonly By _loginButtonLocator = By.CssSelector("input[name *= 'login'][type = 'submit']");
@@ -16,7 +16,7 @@ namespace BusinessLayer.PageObjects
         public LoginPage(IWebDriver driver)
         {
             _driver = driver ?? throw new ArgumentException("Driver is null", nameof(driver));
-            _driver.Navigate().GoToUrl(Url);
+            _driver.Navigate().GoToUrl(_testConfig.GetApplicationLink());
         }
 
         public LoginPage EnterCredentials(string username, string password)
