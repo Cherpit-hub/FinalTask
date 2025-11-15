@@ -1,6 +1,5 @@
 ﻿using CoreLayer;
 using OpenQA.Selenium;
-using Serilog;
 
 namespace BusinessLayer.PageObjects
 {

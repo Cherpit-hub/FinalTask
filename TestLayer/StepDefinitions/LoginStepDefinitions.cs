@@ -5,7 +5,6 @@ using OpenQA.Selenium;
 using Reqnroll;
 using Serilog;
 using Shouldly;
-using System;
 
 namespace TestLayer.StepDefinitions
 {
@@ -42,17 +41,20 @@ namespace TestLayer.StepDefinitions
                 driver.Quit();
             }
         }
+
         [AfterScenario]
         public void AfterScenario() 
         {
             TestSetupAndTeardown.DriverDispose(_driver!);
             Log.Information("Finished test");
         }
+
         [Given("User is on login page using {string}")]
         public void GivenUserIsOnLoginPageUsing(string browser)
         {
             _driver = TestSetupAndTeardown.CreateDriver(browser);
         }
+
         [When("the user enters their username and password")]
         public void WhenTheUserEntersTheirUsernameAndPassword()
         {
@@ -70,12 +72,12 @@ namespace TestLayer.StepDefinitions
         {
             loginPage!.ClickLoginInvalid();
         }
+
         [When("clicks the login button with valid credentials")]
         public void WhenClicksTheLoginButtonWithValidCredentials()
         {
             _mainPage = loginPage!.ClickLoginValid();
         }
-
 
         [Then("the user should see error message: {string}")]
         public void ThenTheUserShouldSeeErrorMessage(string p0)
