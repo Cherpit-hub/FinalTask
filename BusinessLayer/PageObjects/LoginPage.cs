@@ -3,27 +3,22 @@ using OpenQA.Selenium;
 
 namespace BusinessLayer.PageObjects
 {
-    public class LoginPage
+    public class LoginPage : BasePage
     {
-        private readonly IWebDriver _driver;
-        private readonly TestConfig _testConfig = new();
         private readonly By _usernameLocator = By.CssSelector("input[name *= 'user-name']");
         private readonly By _passwordLocator = By.CssSelector("input[name *= 'password']");
         private readonly By _loginButtonLocator = By.CssSelector("input[name *= 'login'][type = 'submit']");
         private readonly By _errorLocator = By.CssSelector("div[class*='error'][class*='container'] h3");
 
-        public LoginPage(IWebDriver driver)
+        public LoginPage(IWebDriver driver) : base(driver) 
         {
-            _driver = driver ?? throw new ArgumentException("Driver is null", nameof(driver));
-            _driver.Navigate().GoToUrl(_testConfig.GetApplicationLink());
+            NavigateTo(new TestConfig().GetApplicationLink());
         }
 
         public LoginPage EnterCredentials(string username, string password)
         {
-            var handlerChain = new SendKeysHandler(username);
-            handlerChain.SetNext(new SendKeysHandler(password));
-            handlerChain.Handle(_driver, _usernameLocator);
-            handlerChain.Handle(_driver, _passwordLocator);
+            FindElement(_usernameLocator).SendKeys(username);
+            FindElement(_passwordLocator).SendKeys(password);
             return this;
         }
         public LoginPage ClearUsername()
@@ -52,7 +47,7 @@ namespace BusinessLayer.PageObjects
         }
         public string GetErrorMessage()
         {
-            return _driver.FindElement(_errorLocator).Text;
+            return FindElement(_errorLocator).Text;
         }
     }
 }

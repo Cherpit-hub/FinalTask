@@ -80,9 +80,9 @@ namespace TestLayer.StepDefinitions
         }
 
         [Then("the user should see error message: {string}")]
-        public void ThenTheUserShouldSeeErrorMessage(string p0)
+        public void ThenTheUserShouldSeeErrorMessage(string errorMessage)
         {
-            loginPage!.GetErrorMessage().ShouldContain(p0);
+            loginPage!.GetErrorMessage().ShouldContain(errorMessage);
         }
 
         [When("clears the password field")]
@@ -92,21 +92,21 @@ namespace TestLayer.StepDefinitions
         }
 
         [Given("username {string}")]
-        public void GivenUsername(string p0)
+        public void GivenUsername(string username)
         {
-            _username = p0;
+            _username = username;
         }
 
         [Given("password {string}")]
-        public void GivenPassword(string p0)
+        public void GivenPassword(string password)
         {
-            _password = p0;
+            _password = password;
         }
 
         [Then("the user should be redirected to new page and see the dashboard title: {string}")]
-        public void ThenTheUserShouldBeRedirectedToNewPageAndSeeTheDashboardTitle(string p0)
+        public void ThenTheUserShouldBeRedirectedToNewPageAndSeeTheDashboardTitle(string dashboardTitle)
         {
-            _mainPage!.GetTitle().ShouldBe(p0);
+            _mainPage!.GetTitle().ShouldBe(dashboardTitle);
         }
     }
 }
